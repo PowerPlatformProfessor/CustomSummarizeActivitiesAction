@@ -24,12 +24,15 @@ namespace CustomSummarizeActivitiesAction
 
                 try
                 {
-                    string input = (string)context.InputParameters["StringParameter"];
+                    string entityid = (string)context.InputParameters["StringParameter"];
+                    string entityType = (string)context.InputParameters["StringParameter"];
+                    string inputText = (string)context.InputParameters["StringParameter"];
+                    string language = (string)context.InputParameters["StringParameter"]; //optional
 
-                    if (!string.IsNullOrEmpty(input))
+                    if (!string.IsNullOrEmpty(inputText))
                     {
                         //Simply reversing the characters of the string
-                        context.OutputParameters["StringProperty"] = new string(input.Reverse().ToArray());
+                        context.OutputParameters["StringProperty"] = new string(inputText.Reverse().ToArray());
                     }
                 }
                 catch (Exception ex)
