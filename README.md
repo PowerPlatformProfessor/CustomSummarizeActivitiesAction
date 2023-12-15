@@ -1,1 +1,1 @@
-# CustomSummarizeActivitesAction
+# CustomSummarizeActivitiesAction
