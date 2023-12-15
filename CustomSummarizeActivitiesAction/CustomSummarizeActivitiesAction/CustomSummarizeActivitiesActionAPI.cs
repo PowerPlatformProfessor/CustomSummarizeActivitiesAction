@@ -1,8 +1,12 @@
-﻿using Microsoft.Xrm.Sdk;
+﻿using CustomSummarizeActivitiesAction.DTO;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Metadata;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CustomSummarizeActivitiesAction
@@ -19,32 +23,79 @@ namespace CustomSummarizeActivitiesAction
             IPluginExecutionContext context = (IPluginExecutionContext)
                 serviceProvider.GetService(typeof(IPluginExecutionContext));
 
-            if (context.MessageName.Equals("sample_CustomAPIExample") && context.Stage.Equals(30))
+            IOrganizationServiceFactory factory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
+
+            IOrganizationService service = factory.CreateOrganizationService(context.UserId);
+
+            if (context.MessageName.Equals("dse_CustomSummarizeActivitiesAPI") && context.Stage.Equals(30))
             {
 
                 try
                 {
-                    string entityid = (string)context.InputParameters["StringParameter"];
-                    string entityType = (string)context.InputParameters["StringParameter"];
-                    string inputText = (string)context.InputParameters["StringParameter"];
-                    string language = (string)context.InputParameters["StringParameter"]; //optional
+                    string entityid = (string)context.InputParameters["entityId"];
+                    string entityType = (string)context.InputParameters["entityType"];
+                    string inputText = (string)context.InputParameters["inputText"];
+                    string language = (string)context.InputParameters["language"]; //optional
 
                     if (!string.IsNullOrEmpty(inputText))
                     {
+                        GetCopilotResponse(service, "You know the following:\\nFrom Customer A \\nTo Customer B\\nMessage: Could you send me a quote on the price of kebab\\n\\nFrom Customer B \\nTo Customer A\\nMessage: Sure the price of kebab is 105 sek,\\n\\nMake a summary of this conversation");
                         //Simply reversing the characters of the string
-                        context.OutputParameters["StringProperty"] = new string(inputText.Reverse().ToArray());
+                        context.OutputParameters["outputText"] = new string(inputText.Reverse().ToArray());
                     }
                 }
                 catch (Exception ex)
                 {
-                    tracingService.Trace("Sample_CustomAPIExample: {0}", ex.ToString());
-                    throw new InvalidPluginExecutionException("An error occurred in Sample_CustomAPIExample.", ex);
+                    tracingService.Trace("dse_CustomSummarizeActivitiesAPI: {0}", ex.ToString());
+                    throw new InvalidPluginExecutionException("An error occurred in dse_CustomSummarizeActivitiesAPI.", ex);
                 }
             }
             else
             {
-                tracingService.Trace("Sample_CustomAPIExample plug-in is not associated with the expected message or is not registered for the main operation.");
+                tracingService.Trace("dse_CustomSummarizeActivitiesAPI plug-in is not associated with the expected message or is not registered for the main operation.");
             }
+        }
+
+        private string GetCopilotResponse(IOrganizationService service, string inputText)
+        {
+
+            
+            var requestPayload = new RequestPayload()
+            {
+                odatatype = "#Microsoft.Dynamics.CRM.expando",
+                version = "3.0",
+                conversation = new Conversation()
+                {
+                    odatatype = "#Microsoft.Dynamics.CRM.expando",
+                    messagesodatatype = "#Collection(Microsoft.Dynamics.CRM.expando)",
+                    messages = new Message[] { new Message() { datetime = DateTime.Now, user="customer", text = inputText} },
+                    
+                },
+                kbarticlesodatatype = "#Collection(Microsoft.Dynamics.CRM.expando)",
+                kbarticles = new Kbarticle[] {}
+            };
+
+            var json = JsonSerializer.Serialize(requestPayload);
+
+            var request = new OrganizationRequest("msdyn_InvokeIntelligenceAction")
+            {
+                ["RequestPayload"] = json,
+                ["ScenarioType"] = "AgentAssistGPT"
+            };
+
+            var response = service.Execute(request);
+
+            var jsonResponse = (string)response.Results["Result"];
+
+            msdyn_InvokeIntelligenceActionResponse responseObj = JsonSerializer.Deserialize<msdyn_InvokeIntelligenceActionResponse>(jsonResponse);
+
+            dynamic suggestionAttribure = responseObj.Results.FirstOrDefault(resp => resp.Key == "responsev2")
+                ?.Value?.Attributes?.FirstOrDefault(attr => attr.Key == "suggestions");
+
+            string text = (string)((List<dynamic>)suggestionAttribure.Value.Entities.Attributes).FirstOrDefault(attr => attr.Key == "sub_context")?.Value;
+
+            return text;
+
         }
     }
 }
