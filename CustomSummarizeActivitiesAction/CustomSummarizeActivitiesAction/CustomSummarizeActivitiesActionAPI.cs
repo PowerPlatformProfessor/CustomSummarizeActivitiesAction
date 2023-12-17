@@ -101,7 +101,7 @@ namespace CustomSummarizeActivitiesAction
                 );
             }
 
-            activitiesContext.AppendLine($"Could you please summarize this information in {language}");
+            activitiesContext.AppendLine($"Could you please generate a short summary of this information in {language}");
 
             trace.Trace(activitiesContext.ToString());
 
