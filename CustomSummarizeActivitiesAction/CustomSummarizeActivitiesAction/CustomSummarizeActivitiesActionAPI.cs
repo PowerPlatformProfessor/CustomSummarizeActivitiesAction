@@ -1,5 +1,6 @@
 ﻿using CustomSummarizeActivitiesAction.DTO;
 using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Metadata;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CustomSummarizeActivitiesAction
@@ -32,17 +34,27 @@ namespace CustomSummarizeActivitiesAction
 
                 try
                 {
-                    string entityid = (string)context.InputParameters["entityId"];
-                    string entityType = (string)context.InputParameters["entityType"];
-                    string inputText = (string)context.InputParameters["inputText"];
-                    string language = (string)context.InputParameters["language"]; //optional
+                    string entityId = (string)context.InputParameters["entityId"];
+                    string language = "english"; //optional
 
-                    if (!string.IsNullOrEmpty(inputText))
+                    if ( string.IsNullOrEmpty(entityId))
                     {
-                        var gptresponse = GetCopilotResponse(service, "You know the following:\\nFrom Customer A \\nTo Customer B\\nMessage: Could you send me a quote on the price of kebab\\n\\nFrom Customer B \\nTo Customer A\\nMessage: Sure the price of kebab is 105 sek,\\n\\nMake a summary of this conversation");
-                        //Simply reversing the characters of the string
-                        context.OutputParameters["outputText"] = gptresponse;
+                        throw new InvalidPluginExecutionException("Missing entityId dse_CustomSummarizeActivitiesAPI.");
                     }
+
+                    var activities = GetRelatedActivities(service, entityId);
+
+                    if(activities.Count == 0)
+                    {
+                        throw new InvalidPluginExecutionException("Missing completed activities");
+                    }
+
+                    var activityContext = GenerateActivitiesContext(tracingService, activities, language);
+
+                    var gptresponse = GetCopilotResponse(service, activityContext);
+
+                    context.OutputParameters["outputText"] = gptresponse;
+
                 }
                 catch (Exception ex)
                 {
@@ -56,10 +68,78 @@ namespace CustomSummarizeActivitiesAction
             }
         }
 
+        private DataCollection<Entity> GetRelatedActivities(IOrganizationService service, string entityId)
+        {
+
+            var query = new QueryExpression("activitypointer");
+            query.ColumnSet.AllColumns = true;
+            query.Criteria.AddCondition("regardingobjectid", ConditionOperator.Equal, entityId);
+            query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 1);
+            query.AddOrder("modifiedon", OrderType.Ascending);
+
+            return service.RetrieveMultiple(query)?.Entities;
+        }
+
+        private string GenerateActivitiesContext(ITracingService trace, DataCollection<Entity> activities, string language)
+        {
+            var activitiesContext = new StringBuilder();
+
+            activitiesContext.AppendLine($"You know the following:");
+            activitiesContext.AppendLine($"\\n");
+
+            foreach (var entity in activities)
+            {
+                var description = string.IsNullOrEmpty(entity.GetAttributeValue<string>("description")) ? "" :
+                    Regex.Replace(entity.GetAttributeValue<string>("description"), "<.*?>", String.Empty);
+
+                activitiesContext.AppendLine(
+                    $"Activity of type: {entity.GetAttributeValue<string>("activitytypecode")} " +
+                    $"completed on: {entity.GetAttributeValue<DateTime>("modifiedon")} " +
+                    $"subject of activity is: {entity.GetAttributeValue<string>("subject")} " +
+                    $"description of actvity is:{description} " +
+                    "\\n"
+                );
+            }
+
+            activitiesContext.AppendLine($"Could you please summarize this information in {language}");
+
+            trace.Trace(activitiesContext.ToString());
+
+            return activitiesContext.ToString();
+        }
+        public string StripTagsCharArray(string source)
+        {
+            char[] array = new char[source.Length];
+            int arrayIndex = 0;
+            bool inside = false;
+
+            for (int i = 0; i < source.Length; i++)
+            {
+                char let = source[i];
+                if (let == '<')
+                {
+                    inside = true;
+                    continue;
+                }
+                if (let == '>')
+                {
+                    inside = false;
+                    continue;
+                }
+                if (!inside)
+                {
+                    array[arrayIndex] = let;
+                    arrayIndex++;
+                }
+            }
+            return new string(array, 0, arrayIndex);
+        }
+
+
         private string GetCopilotResponse(IOrganizationService service, string inputText)
         {
 
-            
+
             var requestPayload = new RequestPayload()
             {
                 odatatype = "#Microsoft.Dynamics.CRM.expando",
@@ -68,8 +148,8 @@ namespace CustomSummarizeActivitiesAction
                 {
                     odatatype = "#Microsoft.Dynamics.CRM.expando",
                     messagesodatatype = "#Collection(Microsoft.Dynamics.CRM.expando)",
-                    messages = new Message[] { new Message() { datetime = DateTime.Now, user="customer", text = inputText} },
-                    
+                    messages = new Message[] { new Message() { datetime = DateTime.Now, user = "customer", text = inputText } },
+
                 },
                 kbarticlesodatatype = "#Collection(Microsoft.Dynamics.CRM.expando)",
                 kbarticles = new Kbarticle[] {
@@ -77,7 +157,7 @@ namespace CustomSummarizeActivitiesAction
                     {
                         id = "a36e4326-4a4a-4ad9-8422-617ae0bd04da",
                         extract = "# Customer service knowledge article *Title:* How to [easy to understand title] *Task/goal:* Brief description of the task/goal to be completed *Prerequisites (if applicable):* Brief description of which products this articles applies to *Instructions [and remember that a picture is worth 1000 words]:* * Step 1 * Step 2 * Step 3 *Outcome:*Brief description of what should be possible once the task is completed *Further reading:*Links to related articles",
-                        relevance = 0.00001F,
+                        relevance = 0.03333333507180214F,
                         title ="Customer Service Trial article",
                         source="internal_kb"
                     }
