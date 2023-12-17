@@ -39,9 +39,9 @@ namespace CustomSummarizeActivitiesAction
 
                     if (!string.IsNullOrEmpty(inputText))
                     {
-                        GetCopilotResponse(service, "You know the following:\\nFrom Customer A \\nTo Customer B\\nMessage: Could you send me a quote on the price of kebab\\n\\nFrom Customer B \\nTo Customer A\\nMessage: Sure the price of kebab is 105 sek,\\n\\nMake a summary of this conversation");
+                        var gptresponse = GetCopilotResponse(service, "You know the following:\\nFrom Customer A \\nTo Customer B\\nMessage: Could you send me a quote on the price of kebab\\n\\nFrom Customer B \\nTo Customer A\\nMessage: Sure the price of kebab is 105 sek,\\n\\nMake a summary of this conversation");
                         //Simply reversing the characters of the string
-                        context.OutputParameters["outputText"] = new string(inputText.Reverse().ToArray());
+                        context.OutputParameters["outputText"] = gptresponse;
                     }
                 }
                 catch (Exception ex)
@@ -72,7 +72,16 @@ namespace CustomSummarizeActivitiesAction
                     
                 },
                 kbarticlesodatatype = "#Collection(Microsoft.Dynamics.CRM.expando)",
-                kbarticles = new Kbarticle[] {}
+                kbarticles = new Kbarticle[] {
+                    new Kbarticle()
+                    {
+                        id = "a36e4326-4a4a-4ad9-8422-617ae0bd04da",
+                        extract = "# Customer service knowledge article *Title:* How to [easy to understand title] *Task/goal:* Brief description of the task/goal to be completed *Prerequisites (if applicable):* Brief description of which products this articles applies to *Instructions [and remember that a picture is worth 1000 words]:* * Step 1 * Step 2 * Step 3 *Outcome:*Brief description of what should be possible once the task is completed *Further reading:*Links to related articles",
+                        relevance = 0.00001F,
+                        title ="Customer Service Trial article",
+                        source="internal_kb"
+                    }
+                }
             };
 
             var json = JsonSerializer.Serialize(requestPayload);
@@ -87,14 +96,14 @@ namespace CustomSummarizeActivitiesAction
 
             var jsonResponse = (string)response.Results["Result"];
 
-            msdyn_InvokeIntelligenceActionResponse responseObj = JsonSerializer.Deserialize<msdyn_InvokeIntelligenceActionResponse>(jsonResponse);
+            //msdyn_InvokeIntelligenceActionResponse responseObj = JsonSerializer.Deserialize<msdyn_InvokeIntelligenceActionResponse>(jsonResponse);
 
-            dynamic suggestionAttribure = responseObj.Results.FirstOrDefault(resp => resp.Key == "responsev2")
-                ?.Value?.Attributes?.FirstOrDefault(attr => attr.Key == "suggestions");
+            //dynamic suggestionAttribure = responseObj.Results.FirstOrDefault(resp => resp.Key == "responsev2")
+            //    ?.Value?.Attributes?.FirstOrDefault(attr => attr.Key == "suggestions");
 
-            string text = (string)((List<dynamic>)suggestionAttribure.Value.Entities.Attributes).FirstOrDefault(attr => attr.Key == "sub_context")?.Value;
+            //string text = (string)((List<dynamic>)suggestionAttribure.Value.Entities.Attributes).FirstOrDefault(attr => attr.Key == "sub_context")?.Value;
 
-            return text;
+            return jsonResponse;
 
         }
     }
