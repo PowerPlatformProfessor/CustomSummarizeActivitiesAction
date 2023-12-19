@@ -107,33 +107,7 @@ namespace CustomSummarizeActivitiesAction
 
             return activitiesContext.ToString();
         }
-        public string StripTagsCharArray(string source)
-        {
-            char[] array = new char[source.Length];
-            int arrayIndex = 0;
-            bool inside = false;
-
-            for (int i = 0; i < source.Length; i++)
-            {
-                char let = source[i];
-                if (let == '<')
-                {
-                    inside = true;
-                    continue;
-                }
-                if (let == '>')
-                {
-                    inside = false;
-                    continue;
-                }
-                if (!inside)
-                {
-                    array[arrayIndex] = let;
-                    arrayIndex++;
-                }
-            }
-            return new string(array, 0, arrayIndex);
-        }
+  
 
 
         private string GetCopilotResponse(IOrganizationService service, string inputText)
@@ -175,13 +149,6 @@ namespace CustomSummarizeActivitiesAction
             var response = service.Execute(request);
 
             var jsonResponse = (string)response.Results["Result"];
-
-            //msdyn_InvokeIntelligenceActionResponse responseObj = JsonSerializer.Deserialize<msdyn_InvokeIntelligenceActionResponse>(jsonResponse);
-
-            //dynamic suggestionAttribure = responseObj.Results.FirstOrDefault(resp => resp.Key == "responsev2")
-            //    ?.Value?.Attributes?.FirstOrDefault(attr => attr.Key == "suggestions");
-
-            //string text = (string)((List<dynamic>)suggestionAttribure.Value.Entities.Attributes).FirstOrDefault(attr => attr.Key == "sub_context")?.Value;
 
             return jsonResponse;
 

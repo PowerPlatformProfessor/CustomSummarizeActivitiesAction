@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomSummarizeActivitiesActionAPI.cs" />
-    <Compile Include="DTO\msdyn_InvokeIntelligenceActionResponse.cs" />
     <Compile Include="DTO\RequestPayload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
