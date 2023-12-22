@@ -1,0 +1,169 @@
+<mxfile host="app.diagrams.net" modified="2023-12-19T18:08:46.779Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0" etag="g5mHE0NnzYvb3gnbAAny" version="22.1.11" type="device">
+  <diagram name="Page-1" id="a4FQxj2U6xWuOFuqYyEu">
+    <mxGraphModel dx="1002" dy="535" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-30" value="" style="whiteSpace=wrap;html=1;aspect=fixed;dashed=1;sketch=1;curveFitting=1;jiggle=2;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="387" y="470" width="240" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-1" value="Canvas App" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="30" y="210" width="120" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-3" target="nQ7HZZswUodNL_FGGqRY-7">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="470" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-3" value="" style="whiteSpace=wrap;html=1;aspect=fixed;dashed=1;sketch=1;curveFitting=1;jiggle=2;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="387" y="20" width="440" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-4" value="Dataverse Custom API&lt;br&gt;Name: CustomSummarizeActivitiesAPI&lt;br style=&quot;border-color: var(--border-color); font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px; background-color: rgb(255, 255, 255);&quot;&gt;Input Parameter:entityId&lt;br&gt;Output Parameter: outputText&lt;br&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="397" y="20" width="223" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-7" target="nQ7HZZswUodNL_FGGqRY-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="570" y="220" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="510" y="240" />
+              <mxPoint x="590" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-16" value="activities" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-11">
+          <mxGeometry x="-0.11" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-7" value="Get related activities" style="whiteSpace=wrap;html=1;aspect=fixed;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="450" y="120" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.007;exitY=0.486;exitDx=0;exitDy=0;exitPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-3" target="nQ7HZZswUodNL_FGGqRY-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="240" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="470" y="234" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-15" value="entityId" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-9">
+          <mxGeometry x="-0.2813" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-12" target="nQ7HZZswUodNL_FGGqRY-13">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="650" y="300" />
+              <mxPoint x="470" y="300" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-17" value="PromptText" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-14">
+          <mxGeometry x="-0.551" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-12" value="Generate prompt text from subject and description fields" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="560" y="120" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-13" target="nQ7HZZswUodNL_FGGqRY-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-26" value="Prompt" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-19">
+          <mxGeometry x="0.0067" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-13" target="nQ7HZZswUodNL_FGGqRY-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="360" />
+              <mxPoint x="350" y="278" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-29" value="2. Retuned Output" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-28">
+          <mxGeometry x="0.4599" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-13" value="Call Copilot api msdyn_InvokeIntelligenceAction" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="420" y="330" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-18" target="nQ7HZZswUodNL_FGGqRY-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-27" value="Response" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-25">
+          <mxGeometry x="-0.0057" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-18" value="Call internal LLM-model" style="whiteSpace=wrap;html=1;rounded=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.483;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-1" target="nQ7HZZswUodNL_FGGqRY-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-23" value="1. Calls Custom API in Dataverse" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-22">
+          <mxGeometry x="0.0819" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.001;exitY=0.463;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-30" target="nQ7HZZswUodNL_FGGqRY-34">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="387" y="580" />
+              <mxPoint x="480" y="580" />
+              <mxPoint x="480" y="578" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-39" value="Input Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-38">
+          <mxGeometry x="-0.1767" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-31" value="Power Automate Cloud Flow&lt;br&gt;Name: Convert to other language&lt;br style=&quot;border-color: var(--border-color); font-size: 11px;&quot;&gt;&lt;span style=&quot;font-size: 11px; background-color: rgb(255, 255, 255);&quot;&gt;Input Parameters: InputText, Language&lt;br&gt;Output Parameter: translatedText&lt;br&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="397" y="480" width="223" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.002;entryY=0.458;entryDx=0;entryDy=0;entryPerimeter=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-1" target="nQ7HZZswUodNL_FGGqRY-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-33" value="3. Translate summary to chosen language" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-32">
+          <mxGeometry x="0.4222" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-34" target="nQ7HZZswUodNL_FGGqRY-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-41" value="4.Translated text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="nQ7HZZswUodNL_FGGqRY-40">
+          <mxGeometry x="-0.2445" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-34" value="Call AI-builder: Translate text into another language" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="500" y="560" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-42" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=0.8;exitY=0.8;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-43" target="nQ7HZZswUodNL_FGGqRY-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="90" as="sourcePoint" />
+            <mxPoint x="260" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-43" value="Note: This is what&amp;nbsp;&lt;br&gt;Microsoft Refers to as grounding" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="5" width="280" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="nQ7HZZswUodNL_FGGqRY-44" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.96;exitY=0.7;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="nQ7HZZswUodNL_FGGqRY-43" target="nQ7HZZswUodNL_FGGqRY-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="350" y="260" as="sourcePoint" />
+            <mxPoint x="400" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
